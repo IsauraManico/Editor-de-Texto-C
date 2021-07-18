@@ -116,16 +116,24 @@ Parametros : o codigo de erro
 Devolve : nada
 Retorna : nada
 */
+
+
 void executar ( int cod )
 {
-	static char * msg[ ] = { "", "Editor vazio (Adicione linhas primeiro)", "Linha invalida",
+	static char * msg[]= { "", "Editor vazio (Adicione linhas primeiro)", "Linha invalida",
 	"Falta virgula", "Delimitador ocorre somente 2 vezes", "Comandos devem comecar com $",
 	"Palavra nao encontrada", "Delimitador ocorre somente 1 vez" ,"posicões invalidas",
 	"Falta número","não é comando valido!","Falta o delimitador %","Não há espaço suficiente na frase!",
 	"Linha corrente não encontrada!","Ao acessar o ficheiro"};
-	if(cod==10) printf (" %s\n",  msg[cod] );
-	else if(cod!=0){
-		printf ("\nERRO: %s\n",  msg[cod] );
+	
+	if(cod==10)
+	{
+		printf (" %s\n",  *(msg+cod) );
+	}
+		
+	else if(cod!=0)
+	{
+		printf ("\nERRO: %s\n",  *(msg+cod) );
 	}
 		
 }
@@ -137,14 +145,23 @@ Parametros : o codigo de erro e oultimo numero da lista invalido
 Devolve : nada
 Retorna : nada
 */
+
+
+
 void executarImprimir ( int cod , int nelem)
 {
 	static char * msg[ ] = { "","o ultimo numero do texto igual a ", "Primeiro numero invalido", 
 	"Segundo numero invalido","Numeros invalidos"};
-	if(cod>0 && cod<=4){
-		if(cod==1) printf("\nERRO: %s %d\n", msg[cod],nelem);
+	if(cod>0 && cod<=4)
+	{
+		if(cod==1)
+		{
+			 printf("\nERRO: %s %d\n", *(msg+cod),nelem);
+		}
 		else
-			printf ("\nERRO: %s\n",  msg[cod] );
+			{
+				printf ("\nERRO: %s\n",  *(msg+cod) );
+			}
 	}
 	
 }
@@ -156,6 +173,8 @@ Parametros : o codigo de erro
 Devolve : nada
 Retorna : nada
 */
+
+
 void executarInvertido(int cod)
 {
 	static char *msg[] = {"", "Numero  ", "Linha invalida!",
@@ -163,9 +182,13 @@ void executarInvertido(int cod)
 	if (cod > 0 && cod <= 4)
 	{
 		if (cod == 1)
-			printf("\nERRO: %s \n", msg[cod]);
+		{
+			printf("\nERRO: %s \n", *(msg+cod));
+		}
 		else
-			printf("\nERRO: %s\n", msg[cod]);
+			{
+				printf("\nERRO: %s\n", *(msg+cod));
+			}
 	}
 }
 
@@ -235,7 +258,8 @@ void imprimirLista(TLista lista, int ini, int fim)
 	
 	for (TAtomo *paux = lista.primeiro; paux != NULL; paux = paux->dprox)
 	{
-		if (paux -> info.chave <= fim && paux -> info.chave >= ini) {
+		if (paux -> info.chave <= fim && paux -> info.chave >= ini)
+		 {
 			imprimirInfo(paux->info);
 		}
 	}
@@ -289,6 +313,8 @@ int contaAntecessor(TAtomo *paux)
 * Devolve : nada
 * Retorna : nada
 */
+
+//ja tem notacao vetorial
 int localizarFrase(TLista lista, char * frase)
 {
 	printf("\n-----------------------------------");
@@ -303,31 +329,35 @@ int localizarFrase(TLista lista, char * frase)
 		else
 			printf("\n%d ",paux->info.chave);
 		//percorrer cada frase
-		for(int i=0;paux->info.frase[i]!='\0';i++){
+		
+		for(int i=0;*(paux->info.frase+i)!='\0';i++)
+		{
 			cont=0; pos=i;
 			//percorrer cada letra da frase
-			for(int j=0;j<size; j++,pos++){
-				if(paux->info.frase[pos]=='\0')
+			for(int j=0;j<size; j++,pos++)
+			{
+				if(*(paux->info.frase+pos)=='\0')
 					break;
 				//se for igual vou somando "cont"
-				if(paux->info.frase[pos]!=frase[j])
+				if(*(paux->info.frase+pos)!=*(frase+j))
 					break;
 				else
 					cont++;
 			}
 			//se encontrei a substring completa, vou pintar
-			if(cont==size){
+			if(cont==size)
+			{
 				encontrei=1;
 				pos=i;
 				while (pos<size+i)
 				{
-					printf("\033[35;1m%c\033[0m",paux->info.frase[pos]);
+					printf("\033[35;1m%c\033[0m",*(paux->info.frase+pos));
 					pos++;
 				}
 				i=(i+size)-1;
 				//caso contrario vou imprimir o caracter daquela posicao [i]
 			}else
-				printf("%c",paux->info.frase[i]);
+				printf("%c",*(paux->info.frase+i));
 		}
 		printf("\n");
 	}
@@ -346,9 +376,14 @@ int localizarFrase(TLista lista, char * frase)
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void arrastarStringFim(char * str, int pos,int size){
-	while(size>=pos){
-		str[pos]=str[pos+1];
+
+
+//ja tem notacao vettttt
+void arrastarStringFim(char * str, int pos,int size)
+{
+	while(size>=pos)
+	{
+		*(str + pos)=*(str + (pos +1));
 		pos++;
 	}
 }
@@ -363,9 +398,13 @@ void arrastarStringFim(char * str, int pos,int size){
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void arrastarString(char * str, int pos,int size){
-	while(size>=pos){
-		str[size+1]=str[size];
+
+//ja tem notacao vetorial
+void arrastarString(char * str, int pos,int size)
+{
+	while(size>=pos)
+	{
+		*(str+(size+1)) = *(str + size);
 		size--;
 	}
 }
@@ -412,6 +451,8 @@ void afastarCaracteres(char * str, int qtd, int ini,int op){
 * Devolve : frase da linha corrente alterada
 * Retorna : um código de erro
 */
+
+//falta anotacao vetorial
 int alterarFrase(TLista lista, char * substring, char * frase)
 {
 	// alterar apenas a linha corrente : esta na descricao do projecto
@@ -428,47 +469,51 @@ int alterarFrase(TLista lista, char * substring, char * frase)
 	int tam=0;
 	int encontrei=0;
 
-	for(int i=0;paux->info.frase[i]!='\0';i++){
+	for(int i=0;*(paux->info.frase+i)!='\0';i++)
+	{
 			cont=0; pos=i;
-			for(int j=0;j<sizeS; j++,pos++){
+			for(int j=0;j<sizeS; j++,pos++)
+			{
 				//substitui o break - o prof nao gosta dele
-				if(paux->info.frase[pos]=='\0')
+				if( *(paux->info.frase+pos) == '\0' )
 					break;
 				//se for igual vou somando "cont"
-				if(paux->info.frase[pos]!=substring[j])
+				if( *(paux->info.frase+pos) != *(substring+j) )
 					break;
 				else
 					cont++;
 			}
 			//se encontrei a substring completa, vou alterar
-			if(cont==sizeS){
+			if(cont == sizeS)
+			{
 				pos=i;
 				// o limite da busca e sempre a 2* string
-				tam=sizeF+i;
+				tam = sizeF+i;
 				//antes de substituir devo analizar os tamanhos das strings
-                if(sizeF==0)
+                if(sizeF == 0 )
                     afastarCaracteres(paux->info.frase,sizeS,i,2);
-				else if(sizeF>sizeS) 
+				else if( sizeF>sizeS ) 
 					afastarCaracteres(paux->info.frase,sizeF-sizeS,sizeS+i,1);
-				else if(sizeF<sizeS)
+				else if( sizeF<sizeS )
 					afastarCaracteres(paux->info.frase,sizeS-sizeF,sizeF+i,2);
-				aux=0;
+				aux = 0;
 				//onde adiciono a segunda frase
-				while (pos<tam)
+				while ( pos < tam )
 				{
-					paux->info.frase[pos]=frase[aux];
-					pos++; aux++;
+					*(paux->info.frase+pos) = *(frase+aux);
+					 pos++; aux++;
 				}
 				// a ideia e pular os caracteres alterados e so
 				//verificar os restantes
 				//espero que entendam!
-				if(sizeF!=0)
+				if( sizeF != 0)
 					i=(i+sizeF)-1;
 				encontrei=1;
 			}
 	}
 	//aqui verifico se encontrei pelo menos uma vez ou nao
-	if(encontrei==0) return FRASE_NOTFOUND;
+	if(encontrei==0) 
+		return FRASE_NOTFOUND;
 	else return OK;
 }
 
@@ -482,6 +527,10 @@ int alterarFrase(TLista lista, char * substring, char * frase)
 * Devolve : frase da linha corrente removida
 * Retorna : um código de erro
 */
+
+//falta anotacao vetorial
+
+//funcao de Alteracao do RECURSO
 int removerFrase(TLista * lista,TPilha * pilha, char * frase)
 {
 	// alterar apenas a linha corrente : esta na descricao do projecto
@@ -490,12 +539,14 @@ int removerFrase(TLista * lista,TPilha * pilha, char * frase)
 
 	int size = tamanhoString(frase);
 	TAtomo * paux = buscarAtomo(*lista,linhaCorrente);
-	if(paux==NULL){
+	if(paux==NULL)
+	{
 		return NOT_FOUND_LINE;
 	} 
 	int sizeLinha = tamanhoString(paux->info.frase);
 	printf("\nsize: %d - linha : %d\n",size,sizeLinha);
-	if(size==sizeLinha){
+	if(size == sizeLinha)
+	{
 		if(verificarStrings(paux->info.frase,frase))
 			{
 				empilhar(pilha,paux->info,TRUE);
@@ -506,21 +557,26 @@ int removerFrase(TLista * lista,TPilha * pilha, char * frase)
 	
 	int tam=0;
 	int encontrei=0;
+
 	empilhar(pilha,paux->info,FALSE);
-	for(int i=0;paux->info.frase[i]!='\0';i++){
+
+	for(int i=0;*(paux->info.frase+i)!='\0';i++)
+	{
 			cont=0; pos=i;
-			for(int j=0;j<size; j++,pos++){
+			for(int j=0;j<size; j++,pos++)
+			{
 				//substitui o break - o prof nao gosta dele
-				if(paux->info.frase[pos]=='\0')
+				if(*(paux -> info.frase+pos) =='\0')
 					break;
 				//se for igual vou somando "cont"
-				if(paux->info.frase[pos]!=frase[j])
+				if(*(paux->info.frase+pos)!= *(frase+j))
 					break;
 				else
 					cont++;
 			}
 			//se encontrei a substring completa, vou remover
-			if(cont==size){
+			if(cont==size)
+			{
 				afastarCaracteres(paux->info.frase,size,i,2);	
 				encontrei=1;
 				//para voltar a verificar apartir desta posicao
@@ -528,26 +584,34 @@ int removerFrase(TLista * lista,TPilha * pilha, char * frase)
 			}
 	}
 	//aqui verifico se encontrei ou nao
-	if(encontrei==0){
+	if(encontrei==0)
+	{
 		//removo da pilha caso n tenha sido removida da frase
 		free(desempilhar(pilha));
 		return FRASE_NOTFOUND;
 	} 
 	return OK;
 }
-
-int recuperarLinha(TLista * lista, TPilha * pilha,PAtomo *paux){
+//funcoes da alteracoes da recurso 
+//Para Recuperar uma determinada LINHA NA FRASE
+int recuperarLinha(TLista * lista, TPilha * pilha,PAtomo *paux)
+{
 	TAtomo *pnovo = (TAtomo*)malloc(sizeof(TAtomo)); 
 	if (pnovo==NULL)
 		return NO_SPACE; 
 	pnovo->info = paux->info; 
 	TAtomo *pp = buscarAtomo(*lista,paux->info.chave);
-	if(pp==NULL) {
-		if(vaziaLista(*lista)) {
+
+	if(pp==NULL)
+	 {
+		if(vaziaLista(*lista)) 
+		{
 			lista->primeiro=lista->ultimo=pnovo;
 			pnovo->dprox=NULL;
 			pnovo->eprox=NULL;
-		}else{
+		}
+		else
+		{
 			pnovo->eprox=lista->ultimo;
 			pnovo->dprox=NULL;
 			lista->ultimo->dprox=pnovo;
@@ -555,7 +619,8 @@ int recuperarLinha(TLista * lista, TPilha * pilha,PAtomo *paux){
 		}
 	}else{
 		
-		if(pp==lista->primeiro){
+		if(pp==lista->primeiro)
+		{
 			pnovo->eprox=NULL;
 			pp->eprox=pnovo;
 			pnovo->dprox=pp;
@@ -573,27 +638,37 @@ int recuperarLinha(TLista * lista, TPilha * pilha,PAtomo *paux){
 	return OK;
 
 }
-
-
-int recuperarFrase(TLista * lista, TPilha * pilha,PAtomo * paux){
+//Funcao Para Recuperar Uma Determinada FRASE
+//Para A O COMANDO <<UNDO>>
+int recuperarFrase(TLista * lista, TPilha * pilha,PAtomo * paux)
+{
 	TAtomo *pp = buscarAtomo(*lista,paux->info.chave);
-	if(pp==NULL) {
+	if(pp==NULL) 
+	{
 		return NOT_FOUND_LINE;
-	}else{
+	}
+	else
+	{
 		pp->info=paux->info;
 	}
 	return OK;
 }
 
-void recuperar(TLista * lista, TPilha * pilha){
+//Funcao Que Recupera o Geral Tanto a linha queanto a Frase
+void recuperar(TLista * lista, TPilha * pilha)
+{
 	PAtomo *paux = desempilhar(pilha);
 	imprimirInfo(paux->info);
-	if(paux!=NULL){
-		if(paux->remover==TRUE){
+
+	if(paux!=NULL)
+	{
+		if(paux->remover==TRUE)
+		{
 			printf("\nrecuperando a linha\n");
 			recuperarLinha(lista,pilha,paux);
 		}	
-		else{
+		else
+		{
 			printf("\nrecuperando a frase\n");
 			recuperarFrase(lista,pilha,paux);
 		}
@@ -609,7 +684,8 @@ void recuperar(TLista * lista, TPilha * pilha){
 * Devolve : nada
 * Retorna : tamanho da string
 */
-int tamanhoString(char * str){
+int tamanhoString(char * str)
+{
 	int tam=0;
 	for (; str[tam] !='\0'; tam++);
 	return tam;
@@ -625,8 +701,13 @@ int tamanhoString(char * str){
 void imprimirInfo(TInfo info)
 {
 	if(info.chave==linhaCorrente)
+	{
 		printf("\n%d → %s\n", info.chave, info.frase);
-	else	printf("\n%d %s\n", info.chave, info.frase);
+	}
+	else	
+	{
+		printf("\n%d %s\n", info.chave, info.frase);
+	}
 }
 
 /*
@@ -716,9 +797,12 @@ int contarAtomosAteAtomo(TAtomo * pdel1, TAtomo * pdel2){
 * Devolve : nada
 * Retorna : 1 ou 0
 */
-int verificarLinhaCorrente(TAtomo * pdel1, TAtomo * pdel2){
-	if(pdel1!=NULL && pdel2!=NULL){
-		while(pdel1!=pdel2){
+int verificarLinhaCorrente(TAtomo * pdel1, TAtomo * pdel2)
+{
+	if(pdel1!=NULL && pdel2!=NULL)
+	{
+		while(pdel1!=pdel2)
+		{
 			if(pdel1->info.chave==linhaCorrente)
 				return 1;
 			pdel1=pdel1->dprox;
@@ -740,6 +824,8 @@ int verificarLinhaCorrente(TAtomo * pdel1, TAtomo * pdel2){
 * Devolve : lista alterada
 * Retorna : nada
 */
+
+//Funcao Para remover Atomos Da Lista
 void removerAtomosLista(TLista *lista,int chave1,int chave2)
 {
 	TAtomo *paux=NULL,*pdel1= buscarAtomo(*lista, chave1);
@@ -747,12 +833,16 @@ void removerAtomosLista(TLista *lista,int chave1,int chave2)
 	int cont=contarAtomosAteAtomo(pdel1,pdel2);
 	actualizarAtomos(pdel2->dprox,cont,0);
 	//printf("elementos para remover: %d\n",cont);
-	if(pdel1!=NULL && pdel2!=NULL){ 
+
+	if(pdel1!=NULL && pdel2!=NULL)
+	{ 
 		paux=pdel1;
-		if(pdel1==lista->primeiro && pdel2==lista->ultimo){
+		if(pdel1==lista->primeiro && pdel2==lista->ultimo)
+		{
 			inicializarLista(lista);
 		}
-		else if(pdel1==lista->primeiro){
+		else if(pdel1==lista->primeiro)
+		{
 			lista->primeiro=pdel2->dprox;
 			lista->primeiro->eprox=NULL; 
 		} else if(pdel2==lista->ultimo){
@@ -926,14 +1016,14 @@ int myAtoi(char *str)
 	int sign = 1;
 	int i = 0;
 
-	if (str[0] == '-')
+	if (*(str+0) == '-')
 	{
 		sign = -1;
 		i++;
 	}
 
-	for (; str[i] != '\0'; i++)
-		res = res * 10 + str[i] - '0';
+	for (; *(str+i) != '\0'; i++)
+		res = res * 10 + (*(str+i) )- '0';
 	return sign * res;
 }
 
@@ -965,10 +1055,12 @@ void lerFrase(char *str)
 * Devolve : string alterada
 * Retorna : nada
 */
-void converterMinuscula(char * str){
+void converterMinuscula(char * str)
+{
 	int i = 0;
-	while (str[i] != '\0') {
-		str[i] = tolower(str[i]);
+	while (*(str+i) != '\0') 
+	{
+		*(str+i) = tolower(*(str+i));
 		i++;
 	}
 }
@@ -982,15 +1074,17 @@ void converterMinuscula(char * str){
 * Devolve : string alterada
 * Retorna : 1 ou 0
 */
-int verifOperacao(char string1[], char string2[])
+
+//falta notacao vetorial
+int verifOperacao(char *string1, char *string2)
 {
-	char copia[TAM];
+	char *copia = (char*)(malloc(sizeof(char) * TAM));
 	copiarString(string1,copia);
 	converterMinuscula(copia);
 	int i = 0;
-	while (copia[i] != '\0')
+	while (*(copia+i) != '\0')
 	{
-		if (copia[i] != string2[i])
+		if (*(copia+i) != *(string2+i))
 			return 0;
 		i++;
 	}
@@ -1000,9 +1094,9 @@ int verifOperacao(char string1[], char string2[])
 int verificarStrings(char * string1, char * string2)
 {
 	int i = 0;
-	while (string1[i] != '\0')
+	while (*(string1+i) != '\0')
 	{
-		if (string1[i] != string2[i])
+		if ( *(string1+i) != *(string2+i) )
 			return 0;
 		i++;
 	}
@@ -1018,14 +1112,16 @@ int verificarStrings(char * string1, char * string2)
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void copiarString(char * str1,char *str2){
+void copiarString(char * str1,char *str2)
+{
 	int i=0,j=0;
-	while(str1[i]!='\0'){
-		if(str1[i]!=' ')
-			str2[j++]=str1[i];
+	while(*(str1+i) !='\0')
+	{
+		if( *(str1+i) !=' ')
+			*(str2+(j++)) = *(str1+i);
 		i++;
 	}
-	str2[j]='\0';
+	*(str2+j) ='\0';
 }
 
 /*
@@ -1038,14 +1134,16 @@ void copiarString(char * str1,char *str2){
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void copiarStringCaracter(char * str1,char *str2,int pos){
+void copiarStringCaracter(char * str1,char *str2,int pos)
+{
 	int i=0,j=0;
-	while(str1[i]!=str1[pos]){
-		if(str1[i]!=' ')
-			str2[j++]=str1[i];
+	while(*(str1+i) != *(str1+pos) )
+	{
+		if(*(str1+i) !=' ')
+			*(str2+(j++)) = *(str1+i);
 		i++;
 	}
-	str2[j]='\0';
+	*(str2+j) = '\0';
 }
 
 /*
@@ -1057,19 +1155,20 @@ void copiarStringCaracter(char * str1,char *str2,int pos){
 * Devolve : string alterada
 * Retorna : 1 ou 0
 */
-int verifLocalizarAlterar(char string1[], char string2[],int pos)
+//alterar para vetorialllllll
+int verifLocalizarAlterar(char *string1, char *string2,int pos)
 {
-	char copia[TAM];
-	copiarStringCaracter(string1,copia,pos);
+	char *copia =(char*)(malloc(sizeof(char)*TAM));
+	copiarStringCaracter(string1, copia,pos);
 	converterMinuscula(copia);
 	removerEspacos(copia);
 	//imprimirFrase(copia);
 	int i = 0;
 	if(pos>-1){
-		while (copia[i] != copia[pos])
+		while (*(copia+i) != *(copia+pos))
 		{
 			//printf(" %c ",string1[i]);
-			if (copia[i] != string2[i])
+			if (*(copia+i) != *(string2+i))
 				return 0;
 			i++;
 		}
@@ -1088,17 +1187,20 @@ int verifLocalizarAlterar(char string1[], char string2[],int pos)
 * Devolve : string alterada
 * Retorna : 1 ou 0
 */
-int verifOperacaoPosicao(char string1[], char string2[],int pos)
+
+//alterar para vetorialllll
+int verifOperacaoPosicao(char *string1, char *string2,int pos)
 {
-	char copia[TAM];
+	char *copia = (char*)(malloc(sizeof(char)*TAM));
 	copiarStringCaracter(string1,copia,pos);
 	converterMinuscula(copia);
 	int i = 0;
-	if(pos>-1){
-		while (copia[i] != copia[pos])
+	if(pos>-1)
+	{
+		while (*(copia+i) != *(copia+pos))
 		{
 			//printf(" %c ",string1[i]);
-			if (copia[i] != string2[i])
+			if (*(copia+i) != *(string2+i))
 				return 0;
 			i++;
 		}
@@ -1115,15 +1217,17 @@ int verifOperacaoPosicao(char string1[], char string2[],int pos)
 * Devolve : nada
 * Retorna : a posição do caracter ou -1
 */
-int verifDigitoPos(char string[])
+
+//alterar para vetorialllll
+int verifDigitoPos(char *string)
 {
 	int i = 0;
-	while (string[i] != '\0')
+	while (*(string+i) != '\0')
 	{
 
 		//criar funcao is digit
 
-		if( isdigit(string[i]))
+		if( isdigit(*(string+i)))
 			return i;
 		i++;
 	}
@@ -1138,12 +1242,14 @@ int verifDigitoPos(char string[])
 * Devolve : nada
 * Retorna : 1 ou 0
 */
-int verifDigito(char string[])
+
+//alterar para vetoriallll
+int verifDigito(char *string)
 {
 	int i = 0;
-	while (string[i] != '\0')
+	while (*(string+i) != '\0')
 	{
-		if( !isdigit(string[i]))
+		if( !isdigit(*(string+i)))
 			return 0;
 		i++;
 	}
@@ -1158,12 +1264,14 @@ int verifDigito(char string[])
 * Devolve : nada
 * Retorna : 1 ou 0
 */
-int verifVirgula(char string[])
+
+//alterar para vetoriall
+int verifVirgula(char *string)
 {
 	int i = 0;
-	while (string[i] != '\0')
+	while (*(string+i) != '\0')
 	{
-		if (string[i] == ',')
+		if (*(string+i) == ',')
 			return 1;
 		i++;
 	}
@@ -1179,11 +1287,13 @@ int verifVirgula(char string[])
 * Devolve : nada
 * Retorna : a posição ou -1
 */
-int verifPercentagem(int i,char string[])
+
+//alterar para vetorial
+int verifPercentagem(int i,char *string)
 {
-	while (string[i] != '\0')
+	while (*(string+i) != '\0')
 	{
-		if (string[i] == '%')
+		if (*(string+i) == '%')
 			return i;
 		i++;
 	}
@@ -1198,14 +1308,17 @@ int verifPercentagem(int i,char string[])
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void removerEspacos(char *str){ 
+void removerEspacos(char *str)
+{ 
     int count=0,i;
-    for(i=0;str[i];i++){
-        if(str[i]!=' '){
-            str[count++]=str[i];
+    for(i=0; *(str+i);i++)
+	{
+        if(*(str+i) !=' ')
+		{
+            *(str+(count++)) = *(str+i);
         }
     }
-    str[count]=0;
+    *(str+count) = 0;
 } 
 
 /*
@@ -1219,17 +1332,18 @@ void removerEspacos(char *str){
 * Devolve : uma string alterada
 * Retorna : a posição do caracter mais 1
 */
-int guardarNum(int ini, char car,char str[], char str2[])
+///falta alterar para vetorialllll
+int guardarNum(int ini, char car,char *str, char *str2)
 {
 	int i = ini;
 	int j = 0;
-	for (; str[i] != car && str[i]!='\0'; i++)
+	for (; *(str+i) != car && *(str+i)!='\0'; i++)
 	{
-			str2[j] = str[i];
+			*(str2+j) = *(str+i);
 			j++;
 		//printf(" %c ",str[i]);
 	}
-	str2[j] = '\0';
+	*(str2+j)= '\0';
 	return i+1 ;
 }
 
@@ -1336,7 +1450,11 @@ int gravarFicheiro(char * path,TLista lista){
 * Devolve : nada
 * Retorna : código de erro
 */
-int executarComandoPercentagens(TLista *lista,TPilha * pilha,char *frase){
+
+//falta alterar para vetorial
+//em faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+int executarComandoPercentagens(TLista *lista,TPilha * pilha,char *frase)
+{
 	int ler=0;
 	char operacao[TAM],palavra1[TAM],palavra2[TAM];
 	int num1=0,num2=0;
@@ -1403,7 +1521,7 @@ int executarComandoPercentagens(TLista *lista,TPilha * pilha,char *frase){
 		if(vaziaLista(*lista)) return LIST_EMPTY;
 		if(percentagem==-1) return FALTA_PERCENTAGEM;
 				percentagem= guardarNum(percentagem+1,'%',frase, operacao);	
-				printf("\n Frase : %s\n",operacao);
+				//printf("\n Frase : %s\n",operacao);
 				int tam=tamanhoString(operacao);
 				if(tam==0) return FRASE_NOTFOUND;
 				if(tam>=TAM) return NO_SPACE;
@@ -1424,6 +1542,8 @@ int executarComandoPercentagens(TLista *lista,TPilha * pilha,char *frase){
 * Devolve : nada
 * Retorna : código de erro
 */
+
+//falta alterar para vetorial
 int executarComandoDigitos(TLista *lista,TPilha * pilha,char *frase){
 	int ler=0;
 	char operacao[TAM];
@@ -1532,7 +1652,8 @@ int executarComandoDigitos(TLista *lista,TPilha * pilha,char *frase){
 * Devolve : nada
 * Retorna : código de erro
 */
-int verificarComandos(TLista *lista,TPilha * pilha,char *frase){
+int verificarComandos(TLista *lista,TPilha * pilha,char *frase)
+{
 	int pos = verifDigitoPos(frase);
 	return executarComandoDigitos(lista,pilha,frase);	
 }
@@ -1544,7 +1665,8 @@ int verificarComandos(TLista *lista,TPilha * pilha,char *frase){
 * Devolve : nada
 * Retorna : nada
 */
-void iniciarEditor(){
+void iniciarEditor()
+{
 
 	TLista lista, nova; 
 	TPilha pilha;
@@ -1554,7 +1676,7 @@ void iniciarEditor(){
 	inicializarLista(&nova);
 
 	int run = 1, ler = 0, cont = 0;
-	char posicao[TAM];
+	//char posicao[TAM];
 	TInfo x;
 	int comando =0;
 
@@ -1562,10 +1684,14 @@ void iniciarEditor(){
 		//printf("linha corrente: %d\n",linhaCorrente);
 		memset(x.frase,'\0',80);
 		lerFrase(x.frase);
-		if(x.frase[0] == '$'){
-			if(ler){
-				if(linhaCorrente==0){
-					if(inserirAtomosInicio(&lista,&nova)==0){
+		if(*(x.frase+0) == '$')
+		{
+			if(ler)
+			{
+				if(linhaCorrente==0)
+				{
+					if(inserirAtomosInicio(&lista,&nova)==0)
+					{
 						inicializarLista(&nova);
 						ler=0;
 						
@@ -1580,16 +1706,20 @@ void iniciarEditor(){
 				
 			}
 			comando = executarComandoPercentagens(&lista,&pilha,x.frase);
-			if(comando==COMANDO_INVALIDO){
+			if(comando==COMANDO_INVALIDO)
+			{
 				removerEspacos(x.frase);
+
 				if (verifOperacao(x.frase, "$inserir"))
 				{
 					ler = 1;
 					
 				}
-				else if(verifOperacao(x.frase,"$undo")){
-					if(!vaziaPilha(pilha)){
-						printf("\ndesempilhando...%d\n",pilha.nElem);
+				else if(verifOperacao(x.frase,"$undo"))
+				{
+					if(!vaziaPilha(pilha))
+					{
+						//printf("\ndesempilhando...%d\n",pilha.nElem);
 						recuperar(&lista,&pilha);
 					}
 					

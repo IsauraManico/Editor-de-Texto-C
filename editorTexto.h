@@ -117,11 +117,11 @@ int myAtoi(char *str);
 
 void lerFrase(char *str);
 
-int verifOperacao(char string1[], char string2[]);
+int verifOperacao(char *string1, char *string2); //falta notacao vetorial
 
-int verifOperacaoPosicao(char * string1, char string2[],int pos);
+int verifOperacaoPosicao(char * string1, char *string2,int pos); //falta notacao vetorial
 
-int guardarNum(int ini, char car,char str[], char str2[]);
+int guardarNum(int ini, char car,char *str, char *str2); //falta notacao vetorial
 
 void actualizarChave(TAtomo *paux,int qtd,int op);
 
@@ -135,13 +135,13 @@ int verificarComandos(TLista *lista,TPilha * pilha,char *frase);
 
 int verificarNumeros(TLista *lista,TPilha * pilha,int a, int b,int n,int op);
 
-int verifVirgula(char string[]);
+int verifVirgula(char *string); //falta notacao vetorial
 
-int verifDigito(char string[]);
+int verifDigito(char *string); //falta notacao vetorial
 
-int verifDigitoPos(char string[]);
+int verifDigitoPos(char *string); //falta notacao vetorial
 
-int verifPercentagem(int i,char string[]);
+int verifPercentagem(int i,char *string); //falta notacao vetorial////////////////////////
 
 void removerEspacos(char *str);
 
