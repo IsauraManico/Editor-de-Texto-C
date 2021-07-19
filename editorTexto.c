@@ -22,7 +22,7 @@
 * Devolve : lista inicializada
 * Retorna : nada
 */
-void inicializarLista (TLista *lista)
+int inicializarLista (TLista *lista)
 {
 	lista->nElem=0;
 	lista->primeiro = NULL;
@@ -36,7 +36,7 @@ void inicializarLista (TLista *lista)
 * Devolve : lista inicializada
 * Retorna : nada
 */
-void inicializarPilha (TPilha *pilha)
+int inicializarPilha (TPilha *pilha)
 {
 	pilha->nElem=0;
 	pilha->ptopo = NULL;
@@ -61,6 +61,7 @@ int vaziaLista (TLista lista)
 * Devolve : nada
 * Retorna : 1 ou 0
 */
+/*  Funcoes Para a Pilha : Alteracoes do Recursoooooooooooooo*/
 int vaziaPilha (TPilha pilha)
 {
 	return (pilha.ptopo==NULL); 
@@ -97,8 +98,8 @@ PAtomo * desempilhar(TPilha *pilha)
 	} 
 	return pdel;
 }
-
-void imprimirPilha(TPilha *pilha){
+//para impresssao de teste da pilha
+int imprimirPilha(TPilha *pilha){
 	PAtomo * paux= NULL;
 	while(! vaziaPilha(*pilha)){
 		paux = desempilhar(pilha);
@@ -118,7 +119,7 @@ Retorna : nada
 */
 
 
-void executar ( int cod )
+int executar ( int cod )
 {
 	static char * msg[]= { "", "Editor vazio (Adicione linhas primeiro)", "Linha invalida",
 	"Falta virgula", "Delimitador ocorre somente 2 vezes", "Comandos devem comecar com $",
@@ -148,7 +149,7 @@ Retorna : nada
 
 
 
-void executarImprimir ( int cod , int nelem)
+int executarImprimir ( int cod , int nelem)
 {
 	static char * msg[ ] = { "","o ultimo numero do texto igual a ", "Primeiro numero invalido", 
 	"Segundo numero invalido","Numeros invalidos"};
@@ -175,7 +176,7 @@ Retorna : nada
 */
 
 
-void executarInvertido(int cod)
+int executarInvertido(int cod)
 {
 	static char *msg[] = {"", "Numero  ", "Linha invalida!",
 						  "Quantidade de linhas invalidas!", "Numeros invalidos!"};
@@ -251,7 +252,7 @@ int verificarNumerosInvertido(TLista *lista, int a, int b, int n)
 * Retorna : nada
 */
 
-void imprimirLista(TLista lista, int ini, int fim)
+int imprimirLista(TLista lista, int ini, int fim)
 {
 	
 	printf("\n-----------------------------------");
@@ -400,7 +401,7 @@ void arrastarStringFim(char * str, int pos,int size)
 */
 
 //ja tem notacao vetorial
-void arrastarString(char * str, int pos,int size)
+int arrastarString(char * str, int pos,int size)
 {
 	while(size>=pos)
 	{
@@ -655,7 +656,7 @@ int recuperarFrase(TLista * lista, TPilha * pilha,PAtomo * paux)
 }
 
 //Funcao Que Recupera o Geral Tanto a linha queanto a Frase
-void recuperar(TLista * lista, TPilha * pilha)
+int recuperar(TLista * lista, TPilha * pilha)
 {
 	PAtomo *paux = desempilhar(pilha);
 	imprimirInfo(paux->info);
@@ -698,7 +699,7 @@ int tamanhoString(char * str)
 * Devolve : nada
 * Retorna : nada
 */
-void imprimirInfo(TInfo info)
+int imprimirInfo(TInfo info)
 {
 	if(info.chave==linhaCorrente)
 	{
@@ -736,7 +737,7 @@ TAtomo *buscarAtomo(TLista lista, int ch)
 * Devolve : uma lista alterada
 * Retorna : nada
 */
-void removerAtomoChave(TLista *lista,int chave)
+int removerAtomoChave(TLista *lista,int chave)
 {
 	TAtomo *pdel= buscarAtomo(*lista, chave);
 	if(pdel!=NULL){
@@ -826,7 +827,7 @@ int verificarLinhaCorrente(TAtomo * pdel1, TAtomo * pdel2)
 */
 
 //Funcao Para remover Atomos Da Lista
-void removerAtomosLista(TLista *lista,int chave1,int chave2)
+int removerAtomosLista(TLista *lista,int chave1,int chave2)
 {
 	TAtomo *paux=NULL,*pdel1= buscarAtomo(*lista, chave1);
 	TAtomo *pdel2= buscarAtomo(*lista, chave2);
@@ -1035,7 +1036,7 @@ int myAtoi(char *str)
 * Devolve : string alterada
 * Retorna : nada
 */
-void lerFrase(char *str)
+int lerFrase(char *str)
 {
 
 	//printf("\n");
@@ -1055,7 +1056,7 @@ void lerFrase(char *str)
 * Devolve : string alterada
 * Retorna : nada
 */
-void converterMinuscula(char * str)
+int converterMinuscula(char * str)
 {
 	int i = 0;
 	while (*(str+i) != '\0') 
@@ -1112,7 +1113,7 @@ int verificarStrings(char * string1, char * string2)
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void copiarString(char * str1,char *str2)
+int copiarString(char * str1,char *str2)
 {
 	int i=0,j=0;
 	while(*(str1+i) !='\0')
@@ -1134,7 +1135,7 @@ void copiarString(char * str1,char *str2)
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void copiarStringCaracter(char * str1,char *str2,int pos)
+int copiarStringCaracter(char * str1,char *str2,int pos)
 {
 	int i=0,j=0;
 	while(*(str1+i) != *(str1+pos) )
@@ -1308,7 +1309,7 @@ int verifPercentagem(int i,char *string)
 * Devolve : uma string alterada
 * Retorna : nada
 */
-void removerEspacos(char *str)
+int removerEspacos(char *str)
 { 
     int count=0,i;
     for(i=0; *(str+i);i++)
@@ -1357,7 +1358,7 @@ int guardarNum(int ini, char car,char *str, char *str2)
 * Devolve : chave alterada
 * Retorna : nada
 */
-void actualizarChave(TAtomo *paux,int qtd,int op)
+int actualizarChave(TAtomo *paux,int qtd,int op)
 {
 	if(op==1){
 		if(paux->info.chave==linhaCorrente)
@@ -1381,7 +1382,7 @@ void actualizarChave(TAtomo *paux,int qtd,int op)
 * Devolve : chaves alteradas
 * Retorna : nada
 */
-void actualizarAtomos(TAtomo *paux,int qtd,int op)
+int actualizarAtomos(TAtomo *paux,int qtd,int op)
 {
 	if(paux!=NULL){
 		for(;paux!=NULL;paux=paux->dprox)
@@ -1390,7 +1391,7 @@ void actualizarAtomos(TAtomo *paux,int qtd,int op)
 	
 }
 
-void actualizarLista(TLista * lista)
+int actualizarLista(TLista * lista)
 {
 	TAtomo * paux =lista->primeiro;
 	int cont=1;
@@ -1665,7 +1666,7 @@ int verificarComandos(TLista *lista,TPilha * pilha,char *frase)
 * Devolve : nada
 * Retorna : nada
 */
-void iniciarEditor()
+int iniciarEditor()
 {
 
 	TLista lista, nova; 

@@ -31,7 +31,7 @@ int main()
 	* Devolve : Nada
 	* Retorna : Nada
 	*/
-	iniciarEditor();
+	printf("%i",iniciarEditor());
 
 	
 

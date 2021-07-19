@@ -9,6 +9,7 @@
 * Este arquivo é como uma interface, apenas declaro tudo o que usarei no programa
 */
 
+//Alterar tambem as funcoes para o tipo voidddddddd!!!!
 #ifndef EDITOR_H
 #define EDITOR_H
 
@@ -87,13 +88,13 @@ int static linhaCorrente = 0;
 // Funções exportadas
 // Todas os metodos do programa
  
-void executar ( int cod );
+int executar ( int cod ); //mudar para int
 
-void executarImprimir ( int cod , int nelem);
+int executarImprimir ( int cod , int nelem);  //mudar para int
 
-void inicializarLista (TLista *lista);
+int inicializarLista (TLista *lista);  //mudar para int
 
-void inicializarPilha (TPilha *pilha);
+int inicializarPilha (TPilha *pilha);   //mudar para int
 
 int vaziaLista (TLista lista); 
 
@@ -105,17 +106,17 @@ int inserirAtomoLinha(TLista *lista1, TLista *lista2, int chave);
 
 int inserirAtomoFimLista(TLista *lista, TInfo x);
 
-void imprimirLista (TLista lista, int ini, int fim); 
+int imprimirLista (TLista lista, int ini, int fim);   //mudar para int
 
-void imprimirInfo(TInfo info); 
+int imprimirInfo(TInfo info);   //mudar para int
 
 TAtomo *buscarAtomo(TLista lista, int ch);
 
-void testeBusca(TLista lista);
+int testeBusca(TLista lista);  //mudar para int
 
 int myAtoi(char *str);
 
-void lerFrase(char *str);
+int lerFrase(char *str);  //mudar para int
 
 int verifOperacao(char *string1, char *string2); //falta notacao vetorial
 
@@ -123,11 +124,11 @@ int verifOperacaoPosicao(char * string1, char *string2,int pos); //falta notacao
 
 int guardarNum(int ini, char car,char *str, char *str2); //falta notacao vetorial
 
-void actualizarChave(TAtomo *paux,int qtd,int op);
+int actualizarChave(TAtomo *paux,int qtd,int op);  //mudar para int
 
-void actualizarAtomos(TAtomo *paux,int qtd,int op);
+int actualizarAtomos(TAtomo *paux,int qtd,int op);  //mudar para int
 
-void iniciarEditor();
+int iniciarEditor();  
 
 int inserirAtomosInicio(TLista *lista1, TLista *lista2);
 
@@ -141,13 +142,13 @@ int verifDigito(char *string); //falta notacao vetorial
 
 int verifDigitoPos(char *string); //falta notacao vetorial
 
-int verifPercentagem(int i,char *string); //falta notacao vetorial////////////////////////
+int verifPercentagem(int i,char *string); 
 
-void removerEspacos(char *str);
+int removerEspacos(char *str);  //mudar para int
 
-void removerAtomoChave(TLista *lista,int chave);
+int removerAtomoChave(TLista *lista,int chave);  //mudar para int
 
-void removerAtomosLista(TLista *lista,int chave1,int chave2);
+int removerAtomosLista(TLista *lista,int chave1,int chave2);  //mudar para int
 
 int contarAtomosAteAtomo(TAtomo * pdel1, TAtomo * pdel2);
 
@@ -161,17 +162,17 @@ int executarComandoDigitos(TLista *lista,TPilha * pilha,char *frase);
 
 int tamanhoString(char * str);
 
-void removerCaracteres(char * str, int pos,int size);
+int removerCaracteres(char * str, int pos,int size);  //mudar para int
 
-void arrastarString(char * str, int pos,int size);
+int arrastarString(char * str, int pos,int size);  //mudar para int
 
-void copiarString(char * str1,char *str2);
+int copiarString(char * str1,char *str2);  //mudar para int
 
-void copiarStringCaracter(char * str1,char *str2,int pos);
+int copiarStringCaracter(char * str1,char *str2,int pos);  //mudar para int
 
-void converterMinuscula(char * str);
+int converterMinuscula(char * str);  //mudar para int
 
-void executarInvertido(int cod);
+int executarInvertido(int cod);  //mudar para int
 
 int contaAntecessor(TAtomo *paux);
 
@@ -183,9 +184,9 @@ int recuperarLinha(TLista * lista, TPilha * pilha,PAtomo * paux);
 
 int recuperarFrase(TLista * lista, TPilha * pilha,PAtomo * paux);
 
-void recuperar(TLista * lista, TPilha * pilha);
+int recuperar(TLista * lista, TPilha * pilha);  //mudar para int
 
-void actualizarLista(TLista * lista);
+int actualizarLista(TLista * lista);  //mudar para int
 
 int verificarStrings(char * string1, char * string2);
 
